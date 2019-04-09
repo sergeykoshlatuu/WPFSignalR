@@ -53,6 +53,11 @@ namespace ChatClient.Views
                     RichTextBoxConsole.AppendText(String.Format("{0}: {1}\r", name, message))
                 )
             );
+            Connection.On<string, string, string>("AddMessageToGroup", (roomName, name, message) =>
+               this.Dispatcher.Invoke(() =>
+                   RichTextBoxConsole.AppendText(String.Format("{0} Send Message to group: {1} :{2}\r", name, roomName, message))
+               )
+           );
             try
             {
                 await Connection.StartAsync();
@@ -104,6 +109,22 @@ namespace ChatClient.Views
             {
                 Connection.StopAsync();
                 Connection.DisposeAsync();
+            }
+        }
+
+        private async void ButtonAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await Connection.InvokeAsync("JoinRoom", TextBoxGroup.Text);
+
+                await Connection.InvokeAsync("SendToGroup",TextBoxGroup.Text, UserName, TextBoxMessage.Text);
+                TextBoxMessage.Text = String.Empty;
+                TextBoxMessage.Focus();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }

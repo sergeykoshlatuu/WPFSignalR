@@ -17,7 +17,7 @@ namespace ChatClient
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+           
         }
     }
 }
