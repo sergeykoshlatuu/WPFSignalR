@@ -345,7 +345,7 @@ namespace ChatClient.ViewModels
 
         private bool CanLogin()
         {
-            return !string.IsNullOrEmpty(UserName) && UserName.Length >= 2 && IsConnected;
+            return !string.IsNullOrEmpty(UserName) && UserName.Length >= 2 && IsConnected&&UserName!="Admin";
         }
 
        
