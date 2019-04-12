@@ -1,4 +1,5 @@
-﻿using ChatClient.Views;
+﻿using ChatClient.Services;
+using ChatClient.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
@@ -17,7 +18,7 @@ namespace ChatClient
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-           
+            containerRegistry.RegisterInstance<IChatService>(new ChatService());
         }
     }
 }
